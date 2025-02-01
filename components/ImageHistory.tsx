@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-import { Search, Clock, X, Download } from "lucide-react";
+import { Search, X, Download } from "lucide-react";
 
 type HistoryItem = {
   id: string;
@@ -49,17 +49,6 @@ export function ImageHistory() {
     image.prompt.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Format date to be more readable
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
   // Add download function
   const handleDownload = async (imageUrl: string, prompt: string) => {
     try {
@@ -84,31 +73,40 @@ export function ImageHistory() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-5">
       {/* Search bar */}
       <div className="relative mb-8">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search prompts..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 rounded-lg border bg-background border-input"
-        />
+        <div className="glass-panel-search rounded-2xl shadow-lg mx-auto">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          <input
+            type="text"
+            placeholder="Search prompts..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={`w-full pl-12 pr-4 py-3 
+              ${
+                theme === "dark"
+                  ? "bg-white/5 text-white placeholder:text-gray-400"
+                  : "bg-gray-100 text-gray-900 placeholder:text-gray-500"
+              }
+              backdrop-blur-lg 
+              border border-gray-200/20 
+              rounded-2xl
+              focus:outline-none focus:ring-2 focus:ring-primary/50
+              transition-all duration-300`}
+          />
+        </div>
       </div>
 
       {isLoading ? (
         // Show loading skeleton while fetching
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 p-1">
           {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="aspect-square bg-gray-200 animate-pulse rounded-lg"
-            />
+            <div key={i} className="aspect-square bg-gray-200 animate-pulse" />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 p-1">
           {filteredImages.map((image) => (
             <motion.div
               key={image.id}
@@ -122,9 +120,10 @@ export function ImageHistory() {
                 src={image.image_url}
                 alt={image.prompt}
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-end p-2">
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end p-2">
                 <p className="text-white text-sm line-clamp-2">
                   {image.prompt}
                 </p>
@@ -183,8 +182,18 @@ export function ImageHistory() {
                   priority
                 />
               </div>
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm px-6 py-3 rounded-full">
-                <p className="text-white text-center">{selectedImage.prompt}</p>
+              <div
+                className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 
+                ${theme === "dark" ? "bg-black/50" : "bg-white/70"} 
+                backdrop-blur-sm px-6 py-3 rounded-full`}
+              >
+                <p
+                  className={`text-center ${
+                    theme === "dark" ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  {selectedImage.prompt}
+                </p>
               </div>
             </motion.div>
           </>

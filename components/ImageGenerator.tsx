@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-} from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import styles from "@/styles/imageGenerator.module.css";
 import { motion, AnimatePresence } from "framer-motion";

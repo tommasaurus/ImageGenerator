@@ -66,6 +66,23 @@
   color: white; /* Add explicit dark mode color */
 }
 
+.glass-panel-search {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 20px;
+}
+
+.glass-panel-search svg {
+  font-size: 20px;
+}
+
+.dark .glass-panel-search {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* color: white; Add explicit dark mode color */
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }

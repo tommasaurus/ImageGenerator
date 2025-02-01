@@ -37,21 +37,21 @@ export default function HistoryPage() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+            className="mb-4"
           >
             <h1
-              className={`text-4xl font-bold ${
+              className={`text-5xl font-bold ml-4 ${
                 theme === "dark" ? "text-white" : "text-gray-900"
               }`}
             >
-              Your Creations
+              History
             </h1>
             <p
-              className={`mt-2 ${
+              className={`mt-2 ml-4 ${
                 theme === "dark" ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              Browse through your generated masterpieces
+              Browse through previous creations
             </p>
           </motion.div>
 
