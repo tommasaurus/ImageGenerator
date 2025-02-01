@@ -24,47 +24,6 @@ interface ImageGeneratorProps {
   onGenerating: (isGenerating: boolean) => void;
 }
 
-// Placeholder images for testing
-const placeholderImages = [
-  "/images/ai-image-1.jpg",
-  "/images/ai-image-2.jpg",
-  "/images/ai-image-3.webp",
-  "/images/ai-image-4.jpg",
-  "/images/ai-image-5.avif",
-];
-
-// Add some initial test images
-const initialImages: GeneratedImage[] = [
-  {
-    id: "0",
-    url: placeholderImages[0],
-    prompt: "A fiery phoenix",
-    storage_path: "",
-    created_at: "",
-  },
-  {
-    id: "1",
-    url: placeholderImages[1],
-    prompt: "Abstract landscape",
-    storage_path: "",
-    created_at: "",
-  },
-  {
-    id: "2",
-    url: placeholderImages[2],
-    prompt: "Digital artwork",
-    storage_path: "",
-    created_at: "",
-  },
-  {
-    id: "3",
-    url: placeholderImages[3],
-    prompt: "Cosmic scene",
-    storage_path: "",
-    created_at: "",
-  },
-];
-
 export function ImageGenerator({ onGenerating }: ImageGeneratorProps) {
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
