@@ -1,7 +1,4 @@
 import { supabase } from "./config";
-import type { Database } from "./db.types";
-
-type ImageGeneration = Database["public"]["Tables"]["image_generations"]["Row"];
 
 export async function saveImage(prompt: string, imageUrl: string) {
   try {
@@ -16,7 +13,7 @@ export async function saveImage(prompt: string, imageUrl: string) {
     const storagePath = `${fileName}`;
 
     // Upload to Supabase Storage
-    const { data: storageData, error: storageError } = await supabase.storage
+    const { error: storageError } = await supabase.storage
       .from("generated-images")
       .upload(storagePath, imageBuffer);
 
