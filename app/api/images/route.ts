@@ -1,6 +1,19 @@
 import { NextResponse } from "next/server";
 import { generateImage } from "@/lib/services/image.service";
-import { saveImage } from "@/lib/supabase/queries";
+import { saveImage, getImages } from "@/lib/supabase/queries";
+
+export async function GET() {
+  try {
+    const images = await getImages();
+    return NextResponse.json(images);
+  } catch (error) {
+    console.error("Error fetching images:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch images" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request: Request) {
   try {
