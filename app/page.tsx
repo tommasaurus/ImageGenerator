@@ -57,7 +57,7 @@ export default function HomePage() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.2 }}
-                      className="absolute top-[-2%] left-[11%] w-80 h-52 rounded-3xl overflow-hidden transform -rotate-6 shadow-2xl hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-500"
+                      className="absolute top-[4%] left-[11%] w-80 h-52 rounded-3xl overflow-hidden transform -rotate-6 shadow-2xl hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-500"
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/10 z-10" />
                       <Image
