@@ -1,0 +1,35 @@
+.title {
+  font-size: 8rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: #1f2937;
+}
+
+:global(.dark) .title {
+  color: white;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #4b5563;
+}
+
+:global(.dark) .subtitle {
+  color: #e5e7eb;
+}
+
+.navLink {
+  color: #1f2937;
+  transition: colors 0.2s ease;
+}
+
+:global(.dark) .navLink {
+  color: white;
+}

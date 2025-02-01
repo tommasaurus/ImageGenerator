@@ -3,16 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --gradient-start: #4f46e5;
-  --gradient-end: #06b6d4;
+  --gradient-start: #8b8e94; /* More beige-gray */
+  --gradient-middle: #f8fafc; /* Almost white */
+  --gradient-end: #8b8e94; /* Same as start */
+  --background-opacity: rgba(255, 255, 255, 0.4);
+  --text-primary: #1a1a1a;
 }
 
 .dark {
-  --gradient-start: #312e81;
-  --gradient-end: #0e7490;
+  --gradient-start: #1e1b4b;
+  --gradient-end: #164e63;
+  --background-opacity: rgba(0, 0, 0, 0.7);
+  --text-primary: #ffffff;
 }
 
 .hero-gradient {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at center,
+    var(--gradient-middle) 0%,
+    var(--gradient-start) 100%
+  );
+}
+
+.dark .hero-gradient {
   background: linear-gradient(
     135deg,
     var(--gradient-start) 0%,
@@ -20,16 +35,35 @@
   );
 }
 
+.hero-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    var(--background-opacity) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 -8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #1f2937; /* Add explicit light mode color */
 }
 
 .dark .glass-panel {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: white; /* Add explicit dark mode color */
 }
 
 .animate-float {
@@ -38,12 +72,41 @@
 
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(var(--rotation));
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-10px) rotate(var(--rotation));
   }
   100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(var(--rotation));
   }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.bg-gradient-300 {
+  background-size: 300% 300%;
+}
+
+@keyframes gradient-text {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text {
+  animation: gradient-text 8s ease infinite;
+}
+
+.text-gradient-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
